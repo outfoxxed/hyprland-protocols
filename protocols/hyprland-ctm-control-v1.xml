@@ -36,7 +36,7 @@
     This protocol is privileged and should not be exposed to unprivileged clients.
   </description>
 
-  <interface name="hyprland_ctm_control_manager_v1" version="1">
+  <interface name="hyprland_ctm_control_manager_v1" version="2">
     <description summary="manager to control CTMs">
       This object is a manager which offers requests to control CTMs.
 
@@ -91,5 +91,16 @@
       <entry name="invalid_matrix" value="0"
         summary="the matrix values are invalid."/>
     </enum>
+
+    <event name="output_overridden" version="2">
+      <description>
+        This event is sent when another manager has replaced the CTM set by
+        the current manager for the given output. set_ctm_for_output may be called
+        again by the current manager after receiving this event.
+
+        This event will not be sent when an output is destroyed.
+      </description>
+      <arg name="output" type="object" interface="wl_output"/>
+    </event>
   </interface>
 </protocol>
